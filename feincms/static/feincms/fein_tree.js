@@ -4,18 +4,6 @@ document.write('<style type="text/css">#result_list { display: none }</style>');
 
 
 feincms.jQuery(function($){
-    // recolor tree after expand/collapse
-    $.extend($.fn.recolorRows = function() {
-        $('tr:visible:even', this).removeClass('row2').addClass('row1');
-        $('tr:visible:odd', this).removeClass('row1').addClass('row2');
-
-        /* Mark inactive rows */
-        $('tr.item_inactive').removeClass('item_inactive');
-        $('div[id^=wrap_active_] input:checkbox:not(:checked)').parents('tr').addClass('item_inactive');
-        $('div[id^=wrap_active_] img').parents('tr').addClass('item_inactive');
-
-    });
-
     function isExpandedNode(id) {
         return feincms.collapsed_nodes.indexOf(id) == -1;
     }
@@ -253,8 +241,6 @@ feincms.jQuery(function($){
         storeCollapsedNodes(feincms.collapsed_nodes);
 
         doToggle(itemId, show);
-
-        $('#result_list tbody').recolorRows();
     }
 
     $.extend($.fn.feinTreeToggleItem = function() {
@@ -287,7 +273,6 @@ feincms.jQuery(function($){
             });
             storeCollapsedNodes(feincms.collapsed_nodes);
             rlist.show();
-            $('tbody', rlist).recolorRows();
         });
         return this;
     });
@@ -308,7 +293,6 @@ feincms.jQuery(function($){
             });
             storeCollapsedNodes([]);
             rlist.show();
-            $('tbody', rlist).recolorRows();
         });
         return this;
     });
@@ -379,5 +363,4 @@ feincms.jQuery(function($){
     }
 
     rlist.show();
-    $('tbody', rlist).recolorRows();
 });
